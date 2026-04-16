@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rox Oil Distribution — Leader du Négoce &amp; de la Logistique Pétrolière</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #fff; background: #0a0a0a; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; background: rgba(0,0,0,0.85);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px; z-index: 100;
+    }
+    .logo { font-size: 1.4rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
+    .logo span { color: #22c55e; }
+    nav ul { list-style: none; display: flex; gap: 36px; }
+    nav ul li a { color: #ccc; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
+    nav ul li a:hover { color: #22c55e; }
+    .nav-contact a { background: #22c55e; color: #000 !important; padding: 10px 22px; border-radius: 4px; font-weight: 700; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600') center/cover no-repeat;
+      display: flex; align-items: flex-end; padding: 80px 48px 80px;
+      position: relative;
+    }
+    .hero-content { max-width: 680px; }
+    .hero-tag { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: #22c55e; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+    .hero-tag::before { content: ''; display: block; width: 40px; height: 2px; background: #22c55e; }
+    .hero h1 { font-size: clamp(3rem, 8vw, 7rem); font-weight: 900; line-height: 0.95; text-transform: uppercase; margin-bottom: 32px; }
+    .hero h1 .green { color: #22c55e; }
+    .hero-desc { font-size: 1rem; color: #ccc; line-height: 1.7; max-width: 500px; margin-bottom: 40px; }
+    .hero-btns { display: flex; gap: 16px; }
+    .btn-primary { background: transparent; border: 2px solid #22c55e; color: #22c55e; padding: 14px 32px; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; cursor: pointer; text-decoration: none; }
+    .btn-secondary { background: transparent; border: 2px solid rgba(255,255,255,0.3); color: #fff; padding: 14px 32px; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; cursor: pointer; text-decoration: none; }
+
+    /* STATS */
+    .stats {
+      position: absolute; right: 48px; bottom: 80px;
+      display: flex; flex-direction: column; gap: 0;
+      background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat { padding: 20px 32px; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: center; }
+    .stat:last-child { border-bottom: none; }
+    .stat-num { font-size: 2.5rem; font-weight: 900; color: #fff; }
+    .stat-num sup { font-size: 1rem; color: #22c55e; }
+    .stat-label { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-top: 4px; }
+
+    /* SECTIONS */
+    section { padding: 100px 48px; }
+    .section-tag { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #22c55e; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .section-tag::before { content: ''; display: block; width: 32px; height: 2px; background: #22c55e; }
+    h2 { font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; text-transform: uppercase; line-height: 1; margin-bottom: 32px; }
+    p { color: #aaa; line-height: 1.75; margin-bottom: 16px; }
+    strong { color: #fff; font-weight: 700; }
+
+    /* À PROPOS */
+    #a-propos { background: #111; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .values { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+    .value-card { border: 1px solid rgba(255,255,255,0.1); padding: 24px; }
+    .value-card h4 { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: #22c55e; margin-bottom: 8px; }
+    .value-card p { font-size: 0.85rem; color: #888; }
+    .about-images { display: grid; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; gap: 12px; height: 500px; }
+    .about-images img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* NOS ENTITÉS */
+    #nos-entites { background: #0d1117; }
+    .entities-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+    .entity-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 40px; }
+    .entity-country { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: #22c55e; margin-bottom: 12px; }
+    .entity-name { font-size: 2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; }
+    .entity-city { font-size: 0.8rem; color: #666; margin-bottom: 24px; }
+    .entity-desc { color: #888; font-size: 0.9rem; line-height: 1.7; margin-bottom: 24px; }
+    .entity-services { list-style: none; }
+    .entity-services li { color: #888; font-size: 0.85rem; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 8px; }
+    .entity-services li::before { content: '●'; color: #22c55e; font-size: 0.5rem; }
+
+    /* INFRASTRUCTURE */
+    #infrastructure { background: #111; }
+    .infra-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 48px 0; background: rgba(255,255,255,0.05); }
+    .infra-stat { background: #111; padding: 40px; }
+    .infra-stat-num { font-size: 3.5rem; font-weight: 900; color: #fff; }
+    .infra-stat-num sup { font-size: 1.2rem; color: #22c55e; }
+    .infra-stat-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #22c55e; margin: 4px 0; }
+    .infra-stat-desc { font-size: 0.8rem; color: #666; }
+    .infra-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .infra-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 32px; }
+    .infra-card h3 { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; margin-bottom: 16px; }
+    .infra-card ul { list-style: none; }
+    .infra-card ul li { color: #888; font-size: 0.85rem; padding: 6px 0; display: flex; align-items: center; gap: 8px; }
+    .infra-card ul li::before { content: '✓'; color: #22c55e; font-size: 0.75rem; }
+
+    /* CONTACT */
+    #contact { background: #0d1117; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; margin-top: 48px; }
+    .contact-offices { display: flex; flex-direction: column; gap: 16px; }
+    .office-card { border: 1px solid rgba(255,255,255,0.08); padding: 32px; }
+    .office-country { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: #22c55e; margin-bottom: 8px; }
+    .office-city { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 16px; }
+    .office-info { color: #888; font-size: 0.85rem; line-height: 1.8; }
+    .office-email { color: #22c55e; font-size: 0.85rem; margin-top: 12px; display: block; text-decoration: none; }
+    .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #666; }
+    .form-group input, .form-group select, .form-group textarea {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      color: #fff; padding: 14px 16px; font-size: 0.9rem; width: 100%;
+    }
+    .form-group textarea { height: 140px; resize: vertical; }
+    .form-group select option { background: #1a1a1a; }
+    .btn-submit { background: #22c55e; color: #000; border: none; padding: 16px 40px; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 800; cursor: pointer; grid-column: 1 / -1; justify-self: start; }
+
+    /* FOOTER */
+    footer { background: #050505; border-top: 1px solid rgba(255,255,255,0.05); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-size: 1.2rem; font-weight: 800; }
+    .footer-logo span { color: #22c55e; }
+    .footer-copy { color: #444; font-size: 0.75rem; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      section { padding: 60px 24px; }
+      .about-grid, .entities-grid, .infra-stats, .infra-cards, .contact-grid { grid-template-columns: 1fr; }
+      .hero { padding: 80px 24px 60px; }
+      .stats { position: static; margin-top: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="logo">
+    <span>ROX</span> Oil<br><small style="font-size:0.5rem;font-weight:400;letter-spacing:0.1em;color:#888">DISTRIBUTION</small>
+  </div>
+  <ul>
+    <li><a href="#a-propos">À PROPOS</a></li>
+    <li><a href="#nos-entites">NOS ENTITÉS</a></li>
+    <li><a href="#infrastructure">INFRASTRUCTURE</a></li>
+    <li><a href="#galerie">GALERIE</a></li>
+    <li class="nav-contact"><a href="#contact">CONTACT</a></li>
+  </ul>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-tag">AFRIQUE CENTRALE — HYDROCARBURES</p>
+    <h1>
+      LEADER DU<br>
+      NÉGOCE<br>
+      &amp; DE LA<br>
+      <span class="green">LOGISTIQUE</span><br>
+      PÉTROLIÈRE
+    </h1>
+    <p class="hero-desc">
+      Rox Oil Distribution opère en République du Congo et en RDC avec une infrastructure de classe mondiale — stockage, bunkering et distribution intégrés.
+    </p>
+    <div class="hero-btns">
+      <a href="#nos-entites" class="btn-primary">NOS ACTIVITÉS →</a>
+      <a href="#contact" class="btn-secondary">NOUS CONTACTER</a>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">25<sup>KT</sup></div>
+      <div class="stat-label">CAPACITÉ STOCKAGE</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">200<sup>m</sup></div>
+      <div class="stat-label">QUAI MARITIME</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2</div>
+      <div class="stat-label">PAYS D'OPÉRATION</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">10<sup>+</sup></div>
+      <div class="stat-label">ANS D'EXPÉRIENCE</div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section id="a-propos">
+  <div class="about-grid">
+    <div>
+      <p class="section-tag">NOTRE GROUPE</p>
+      <h2>UN ACTEUR STRUCTURÉ &amp; CRÉDIBLE</h2>
+      <p>Rox Oil est un groupe énergétique <strong>dynamique et structuré</strong>, opérant en Afrique Centrale avec une expertise reconnue dans le négoce et la logistique des hydrocarbures.</p>
+      <p>Fondé sur des valeurs de <strong>fiabilité, d'excellence et de partenariat durable</strong>, le groupe fournit des solutions énergétiques de qualité supérieure depuis ses installations de Pointe-Noire et Kinshasa.</p>
+      <div class="values">
+        <div class="value-card">
+          <h4>FIABILITÉ</h4>
+          <p>Engagement constant envers nos clients et partenaires</p>
+        </div>
+        <div class="value-card">
+          <h4>EXCELLENCE</h4>
+          <p>Professionnalisme dans tous nos services</p>
+        </div>
+        <div class="value-card">
+          <h4>PARTENARIAT</h4>
+          <p>Relations durables et mutuellement bénéfiques</p>
+        </div>
+        <div class="value-card">
+          <h4>INTÉGRITÉ</h4>
+          <p>Transparence et éthique dans toutes nos opérations</p>
+        </div>
+      </div>
+    </div>
+    <div class="about-images">
+      <div style="background:#1a1a1a;display:flex;align-items:center;justify-content:center;color:#444;font-size:0.8rem;">Personnel Rox Oil</div>
+      <div style="background:#1a1a1a;display:flex;align-items:center;justify-content:center;color:#444;font-size:0.8rem;">Infrastructure Pointe-Noire</div>
+    </div>
+  </div>
+</section>
+
+<!-- NOS ENTITÉS -->
+<section id="nos-entites">
+  <p class="section-tag">NOS ENTITÉS</p>
+  <h2>DEUX PAYS, UNE EXPERTISE</h2>
+  <p>Rox Oil opère à travers deux entités complémentaires, couvrant les marchés congolais et RD congolais avec une offre intégrée.</p>
+
+  <div class="entities-grid">
+    <!-- République du Congo -->
+    <div class="entity-card">
+      <p class="entity-country">RÉPUBLIQUE DU CONGO</p>
+      <h3 class="entity-name">ROX OIL<br>DISTRIBUTION</h3>
+      <p class="entity-city">Pointe-Noire — Siège du groupe</p>
+      <p class="entity-desc">
+        Société mère du groupe, spécialisée dans l'importation, le stockage et la distribution de produits pétroliers de haute qualité depuis ses installations portuaires de Pointe-Noire.
+      </p>
+      <ul class="entity-services">
+        <li>Importation de MGO (Marine Gas Oil)</li>
+        <li>Importation de GO (Gasoil)</li>
+        <li>Stockage en réservoirs haute capacité</li>
+        <li>Bunkering de navires offshore</li>
+        <li>Distribution terrestre</li>
+      </ul>
+    </div>
+
+    <!-- RDC -->
+    <div class="entity-card">
+      <p class="entity-country">RÉPUBLIQUE DÉMOCRATIQUE DU CONGO</p>
+      <h3 class="entity-name">ROX OIL<br>RDC</h3>
+      <p class="entity-city">Kinshasa — Présence nationale</p>
+      <p class="entity-desc">
+        Extension du groupe en Afrique Centrale, spécialisée dans l'importation et la vente en gros de produits pétroliers auprès de grossistes et distributeurs locaux.
+      </p>
+      <ul class="entity-services">
+        <li>Importation de produits pétroliers</li>
+        <li>Distribution en gros</li>
+        <li>Approvisionnement de grossistes</li>
+        <li>Vente aux distributeurs locaux</li>
+        <li>Couverture nationale RDC</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- INFRASTRUCTURE -->
+<section id="infrastructure">
+  <p class="section-tag">INFRASTRUCTURE</p>
+  <h2>CAPACITÉS INDUSTRIELLES</h2>
+  <p>Des installations conçues pour répondre aux exigences les plus élevées du secteur pétrolier international.</p>
+
+  <div class="infra-stats">
+    <div class="infra-stat">
+      <div class="infra-stat-num">25<sup>K</sup></div>
+      <div class="infra-stat-label">TONNES MÉTRIQUES</div>
+      <div class="infra-stat-desc">Capacité totale de stockage</div>
+    </div>
+    <div class="infra-stat">
+      <div class="infra-stat-num">200<sup>m</sup></div>
+      <div class="infra-stat-label">MÈTRES LINÉAIRES</div>
+      <div class="infra-stat-desc">Quai pour navires offshore</div>
+    </div>
+    <div class="infra-stat">
+      <div class="infra-stat-num">2</div>
+      <div class="infra-stat-label">PAYS</div>
+      <div class="infra-stat-desc">Présence Congo &amp; RDC</div>
+    </div>
+    <div class="infra-stat">
+      <div class="infra-stat-num">10<sup>+</sup></div>
+      <div class="infra-stat-label">ANNÉES</div>
+      <div class="infra-stat-desc">D'expérience hydrocarbures</div>
+    </div>
+  </div>
+
+  <div class="infra-cards">
+    <div class="infra-card">
+      <h3>INSTALLATIONS PORTUAIRES</h3>
+      <ul>
+        <li>Quai maritime de 200 mètres linéaires</li>
+        <li>Accès direct navires offshore</li>
+        <li>Dépotage et chargement intégré</li>
+        <li>Zone portuaire Pointe-Noire</li>
+        <li>Sécurité aux normes internationales</li>
+      </ul>
+    </div>
+    <div class="infra-card">
+      <h3>CAPACITÉS DE STOCKAGE</h3>
+      <ul>
+        <li>25 000 tonnes métriques de capacité</li>
+        <li>Réservoirs certifiés aux normes API</li>
+        <li>Séparation MGO / Gasoil</li>
+        <li>Systèmes anti-incendie et sécurité</li>
+        <li>Monitoring en temps réel</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section id="galerie" style="background:#0d1117;">
+  <p class="section-tag">GALERIE</p>
+  <h2>NOS INSTALLATIONS</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;">
+    <div style="background:#1a1a1a;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:#444;font-size:0.8rem;">Réservoirs de stockage</div>
+    <div style="background:#1a1a1a;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:#444;font-size:0.8rem;">Installations portuaires</div>
+    <div style="background:#1a1a1a;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:#444;font-size:0.8rem;">Flotte de distribution</div>
+    <div style="background:#1a1a1a;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:#444;font-size:0.8rem;">Équipe Rox Oil</div>
+    <div style="background:#1a1a1a;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:#444;font-size:0.8rem;">Quai maritime</div>
+    <div style="background:#1a1a1a;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:#444;font-size:0.8rem;">Opérations RDC</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-tag">CONTACT</p>
+  <h2>PARLONS AFFAIRES</h2>
+
+  <div class="contact-grid">
+    <div class="contact-offices">
+      <div class="office-card">
+        <p class="office-country">RÉPUBLIQUE DU CONGO</p>
+        <h3 class="office-city">POINTE-NOIRE</h3>
+        <div class="office-info">
+          Siège social — Rox Oil Distribution<br>
+          Zone portuaire, Pointe-Noire<br>
+          République du Congo
+        </div>
+        <a href="mailto:contact@roxoil.com" class="office-email">contact@roxoil.com</a>
+      </div>
+
+      <div class="office-card">
+        <p class="office-country">RÉP. DÉMOCRATIQUE DU CONGO</p>
+        <h3 class="office-city">KINSHASA</h3>
+        <div class="office-info">
+          Bureau régional — Rox Oil RDC<br>
+          Kinshasa, RDC
+        </div>
+        <a href="mailto:contact@roxoil-rdc.com" class="office-email">contact@roxoil-rdc.com</a>
+      </div>
+    </div>
+
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-group">
+        <label>PRÉNOM</label>
+        <input type="text" placeholder="Jean" />
+      </div>
+      <div class="form-group">
+        <label>NOM</label>
+        <input type="text" placeholder="Dupont" />
+      </div>
+      <div class="form-group full">
+        <label>SOCIÉTÉ</label>
+        <input type="text" placeholder="Votre entreprise" />
+      </div>
+      <div class="form-group full">
+        <label>EMAIL PROFESSIONNEL</label>
+        <input type="email" placeholder="jean.dupont@societe.com" />
+      </div>
+      <div class="form-group full">
+        <label>ENTITÉ CONCERNÉE</label>
+        <select>
+          <option value="">Sélectionner...</option>
+          <option value="distribution">Rox Oil Distribution (Congo)</option>
+          <option value="rdc">Rox Oil RDC (Kinshasa)</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>MESSAGE</label>
+        <textarea placeholder="Décrivez votre besoin ou votre demande de partenariat..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">ENVOYER LE MESSAGE →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span>ROX</span> Oil Distribution</div>
+  <div class="footer-copy">© 2024 Rox Oil Distribution. Tous droits réservés. Pointe-Noire, République du Congo.</div>
+</footer>
+
+</body>
+</html>
